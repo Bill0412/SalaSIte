@@ -5,13 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>SALA通讯录</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("添加新成员", "Create")
 </p>
 <script></script>
-
+<style>
+    #id-3 {
+        color:red;
+    }
+    tbody.detail td.itemname{
+        width:30%;
+        text-align:center;
+    }
+    tbody.detail td.itemname+td {
+        width: 70%;
+        text-align:start;
+    }
+</style>
 <table class="table table-responsive table-hover table-bordered" id="accordion">
     <tr>
         <th>
@@ -65,26 +77,33 @@
         <tr>
             <td colspan="6">
                 <table style="width:100%">
-                    <tbody class="collapse" style="margin-left:6px" id="id-@item.UserId">
+                    <thead>
                         <tr>
-                            <td align="center">@Html.DisplayNameFor(model => model.Email)</td>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="collapse detail" style="margin-left:6px" id="id-@item.UserId">
+
+                        <tr>
+                            <td class="itemname">@Html.DisplayNameFor(model => model.Email)</td>
                             <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         </tr>
                         <tr>
-                            <td align="center">@Html.DisplayNameFor(model => model.Birthday)</td>
+                            <td class="itemname">@Html.DisplayNameFor(model => model.Birthday)</td>
                             <td>@Html.DisplayFor(modelItem => item.Birthday)</td>
                         </tr>
                         <tr>
-                            <td align="center">@Html.DisplayNameFor(model => model.EntryTime)</td>
+                            <td class="itemname">@Html.DisplayNameFor(model => model.EntryTime)</td>
                             <td>@Html.DisplayFor(modelItem => item.EntryTime)</td>
                         </tr>
                         <tr>
-                            <td align="center">@Html.DisplayNameFor(model => model.ResignTime)</td>
+                            <td class="itemname">@Html.DisplayNameFor(model => model.ResignTime)</td>
                             <td>@Html.DisplayFor(modelItem => item.ResignTime)</td>
                         </tr>
                         <tr>
-                            <td align="center">@Html.DisplayNameFor(model => model.SelfDescription)</td>
-                            <td>@Html.DisplayFor(modelItem => item.SelfDescription)</td>
+                            <td class="itemname">@Html.DisplayNameFor(model => model.SelfDescription)</td>
+                            <td><article>@Html.DisplayFor(modelItem => item.SelfDescription)</article></td>
                         </tr>
                         <tr>
                             <td colspan="2">

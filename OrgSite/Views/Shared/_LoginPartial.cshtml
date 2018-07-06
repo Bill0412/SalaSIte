@@ -1,15 +1,16 @@
 ﻿@using OrgSite.Models;
+@*model MemberLogin*@
 @if (Session["login"] == null)
 {
     using (Html.BeginForm("Login", "Main", FormMethod.Post, new { role = "form" }))
     {
         <div class="form-group">
             <label>用户名</label>
-            <input type="text" class="form-control" placeholder="username" />
+            <input type="text" name="UserName" class="form-control" placeholder="username" />
         </div>
         <div class="form-group">
             <label>密码</label>
-            <input type="password" class="form-control" placeholder="password" />
+            <input type="password" name="PassWord" class="form-control" placeholder="password" />
         </div>
         <div class="pull-right form-group">
             <button type="submit" class="btn btn-default">登录</button>

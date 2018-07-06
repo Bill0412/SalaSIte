@@ -13,7 +13,7 @@ namespace OrgSite.Models
         public short UserId { get; set; }
 
         [Key]
-        [StringLength(20), Display(Name = "用户名")]
+        [StringLength(20), Display(Name = "用户名"),Required]
         public string UserName { get; set; }
 
         [Required]
@@ -24,11 +24,5 @@ namespace OrgSite.Models
         public virtual Member Member { get; set; }
     }
 
-    public class LoginStatus
-    {
-        public short UserId { get; set; }
-        [MaxLength(20,ErrorMessage ="超出用户名的长度限制。")]
-        public string UserName { get; set; }
-        public string RealName { get; set; }
-    }
+
 }

@@ -23,33 +23,32 @@ namespace OrgSite.Controllers
             }
             return View(massages);
         }
-
-        // GET: Main/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult ChangePw()
         {
             return View();
         }
 
-        // GET: Main/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Main/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult ChangePw(ResetPasswordViewModel resetPw)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+            if (resetPw.ConfirmPassword != resetPw.Password)
             {
                 return View();
             }
+            else
+            {
+                using(DbAccess db=new DbAccess())
+                {
+                    if (ModelState.IsValid)
+                    {
+                        //db.Entry(resetPw).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Main/Edit/5
@@ -74,31 +73,10 @@ namespace OrgSite.Controllers
             }
         }
 
-        // GET: Main/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Main/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         [HttpPost]
         public ActionResult Login(Models.MemberLogin login)
         {
+            
             using(DbAccess db=new DbAccess())
             {
                 var user = db.MemberLogins.Where(x => x.UserName == login.UserName && x.PassWord==login.PassWord);
