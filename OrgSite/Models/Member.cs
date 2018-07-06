@@ -19,8 +19,6 @@ namespace OrgSite.Models
         [Key]
         public short UserId { get; set; }
 
-        [StringLength(20),Display(Name ="用户名")]
-        public string UserName { get; set; }
 
         [Required,Display(Name ="姓名")]
         [StringLength(20)]
@@ -32,19 +30,19 @@ namespace OrgSite.Models
         [StringLength(10), Display(Name = "岗位")]
         public string Position { get; set; }
 
-        [StringLength(30), Display(Name = "邮箱地址")]
+        [StringLength(30), Display(Name = "邮箱地址"),EmailAddress]
         public string Email { get; set; }
 
-        [StringLength(20), Display(Name = "手机号码")]
+        [StringLength(20), Display(Name = "手机号码"),Phone]
         public string PhoneNumber { get; set; }
 
         [Column(TypeName = "date"), Display(Name = "生日")]
         public DateTime? Birthday { get; set; }
 
-        [Display(AutoGenerateField = false)]
+        [Display(AutoGenerateField = false,Name = "加入时间")]
         public DateTime EntryTime { get; set; }
 
-        [Display(AutoGenerateField =false)]
+        [Display(AutoGenerateField =false, Name = "退休时间")]
         public DateTime? ResignTime { get; set; }
 
         [StringLength(150), Display(Name = "简介")]

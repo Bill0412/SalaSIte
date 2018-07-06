@@ -9,8 +9,12 @@ namespace OrgSite.Models
     [Table("MemberLogin")]
     public partial class MemberLogin
     {
-        [Key]
+
         public short UserId { get; set; }
+
+        [Key]
+        [StringLength(20), Display(Name = "ÓÃ»§Ãû")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(50)]

@@ -26,6 +26,10 @@ namespace OrgSite
     {
         protected override void Seed(DbAccess context)
         {
+            context.Members.Add(new Models.Member { RealName = "李嘉宁", EntryTime = DateTime.Now.Date ,Email="3@33.c"});
+            context.Members.Add(new Models.Member { RealName = "李雨谦", EntryTime = DateTime.Now.Date });
+            context.Members.Add(new Models.Member { RealName = "刘真言", EntryTime = DateTime.Now.Date });
+            context.SaveChanges();
             base.Seed(context);
         }
     }

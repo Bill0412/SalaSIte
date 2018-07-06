@@ -47,7 +47,7 @@ namespace OrgSite.Models
                 .Property(e => e.topic)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Member>()
+            modelBuilder.Entity<MemberLogin>()
                 .Property(e => e.UserName)
                 .IsFixedLength();
 

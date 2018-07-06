@@ -9,35 +9,31 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header></header>
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <header></header>
+        <div class="container">
+            <div class="navbar-header">
 
-        <div class="navbar-header">
-            
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="glyphicon-apple"></span>菜单
-            </button>
-
-            <div>
-
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#">浙江大学学生校友联络协会</a>
+                <img src="~/Content/logo.png" alt="SALA" class="img-circle img-responsive" style="height:60px"/>
+
             </div>
-
+            <div class="collapse navbar-collapse">
+                <ul class="nav nav-pills navbar-nav navbar-right">
+                    <li role="presentation" class="active"><a href=@Url.Action("Index","Home")><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                    <li role="presentation">@Html.ActionLink("通讯录", "Index", "Members")</li>
+                    <li role="presentation">@Html.ActionLink("BBS", "Index", "Massages")</li>
+                    <li role="presentation">@Html.ActionLink("活动管理", "Index", "Events")</li>
+                </ul>
+            </div>
         </div>
-        <div class="navbar-default">
-            <ul class="nav nav-pills  navbar-right">
-                <li><a><img src="~/Content/logo.png" alt="SALA" class="img-circle img-responsive" width="28" /></a></li>
-                <li role="presentation" class="active">@Html.ActionLink("首页", "Index", "Home")</li>
-                <li role="presentation">@Html.ActionLink("通讯录", "Index", "Members")</li>
-                <li role="presentation">@Html.ActionLink("BBS", "Index", "Massages")</li>
-                <li role="presentation">@Html.ActionLink("活动管理", "Index", "Events")</li>
-                <li><a></a></li>
-            </ul>
-        </div>
-
     </nav>
 
 

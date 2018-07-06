@@ -10,10 +10,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-bordered table-hover">
+<script></script>
+
+<table class="table table-responsive table-hover table-bordered" id="accordion">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.MemberLogin.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RealName)
@@ -25,55 +27,99 @@
             @Html.DisplayNameFor(model => model.Position)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Birthday)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SelfDescription)
         </th>
         <th></th>
     </tr>
+    @*{ int count = 0;}*@
+    @foreach (var item in Model)
+    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RealName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Birthday)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SelfDescription)
-        </td>
-        <td>
-            <span class="glyphicon-arrow-down"></span>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
-        </td>
-    </tr>
-}
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberLogin.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RealName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                <a data-toggle="collapse" data-parent="#accordion" data-target="#id-@item.UserId">
+                    <span class="glyphicon glyphicon-collapse-down"></span> More
+                </a>
+
+                <!--                 <button class="btn" data-toggle="collapse" data-target="#detail-@item.UserId" data-parent="#accordion">
+        <span class="glyphicon glyphicon-collapse-down"></span> More
+    </button>
+                    span class="glyphicon-arrow-down"></!--span>-->
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <table style="width:100%">
+                    <tbody class="collapse" style="margin-left:6px" id="id-@item.UserId">
+                        <tr>
+                            <td align="center">@Html.DisplayNameFor(model => model.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        </tr>
+                        <tr align="center">
+                            <td>@Html.DisplayNameFor(model => model.Birthday)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Birthday)</td>
+                        </tr>
+                        <tr align="center">
+                            <td>@Html.DisplayNameFor(model => model.EntryTime)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EntryTime)</td>
+                        </tr>
+                        <tr align="center">
+                            <td>@Html.DisplayNameFor(model => model.ResignTime)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ResignTime)</td>
+                        </tr>
+                        <tr align="center">
+                            <td>@Html.DisplayNameFor(model => model.SelfDescription)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SelfDescription)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <!-- <div class="container">
+        <div class="row">
+            <div class="col-md-2">@Html.DisplayNameFor(model => model.Email)</div>
+            <div class="col-md-6">@Html.DisplayFor(modelItem => item.Email)</div>
+        </div>
+    </div>
+               @* <table border="1">
+           <tr>
+
+               <td align="left" width="300">@Html.DisplayNameFor(model => model.Email)</td>
+               <td align="right" width="700">
+                   @Html.DisplayFor(modelItem => item.Email)
+               </td>
+           </tr>
+
+       </table>
+               <div style="background-color:aqua">
+                   <div class="collapse" id="id-@item.UserId">
+                   </div>
+               </div>*@ -->
+            </td>
+
+        </tr>
+    }
+
 
 </table>
