@@ -10,23 +10,23 @@ namespace OrgSite.Models
     public partial class Massage
     {
         [Key]
-        public int mId { get; set; }
+        public int MId { get; set; }
 
         [StringLength(20)]
-        public string topic { get; set; }
+        public string Topic { get; set; }
 
         [StringLength(50)]
-        public string header { get; set; }
+        public string Header { get; set; }
 
         public DateTime? publishingTime { get; set; }
 
-        public int? pId { get; set; }
+        public int? PId { get; set; }
 
         public short? UserId { get; set; }
 
-        public short? targetId { get; set; }
+        public short? TargetId { get; set; }
 
         [Column(TypeName = "ntext")]
-        public string content { get; set; }
+        public string Content { get; set; }
     }
 }

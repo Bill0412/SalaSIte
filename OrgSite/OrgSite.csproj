@@ -188,10 +188,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807061339275_Initial.cs" />
+    <Compile Include="Migrations\201807061339275_Initial.Designer.cs">
+      <DependentUpon>201807061339275_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -217,6 +222,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\logo.png" />
+    <Content Include="Content\main.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -286,11 +292,17 @@
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807061339275_Initial.resx">
+      <DependentUpon>201807061339275_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

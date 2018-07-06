@@ -44,7 +44,7 @@ namespace OrgSite.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<Massage>()
-                .Property(e => e.topic)
+                .Property(e => e.Topic)
                 .IsFixedLength();
 
             modelBuilder.Entity<MemberLogin>()

@@ -1,4 +1,38 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using OrgSite.Models;
+@if (Session["login"] == null)
+{
+    using (Html.BeginForm("Login", "Main", FormMethod.Post, new { role = "form" }))
+    {
+        <div class="form-group">
+            <label>用户名</label>
+            <input type="text" class="form-control" placeholder="username" />
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" class="form-control" placeholder="password" />
+        </div>
+        <div class="pull-right form-group">
+            <button type="submit" class="btn btn-default">登录</button>
+            <button type="button" id="btnsighup" class="btn btn-default">注册@*Html.ActionLink("注册","SighUp","Main")*@</button>
+        </div>
+        <br />@ViewBag.err
+    }
+    <script>
+        $("#btnsighup").bind("click", function () {
+            alert('暂不开放注册，请社员向管理员询问自己所分配到的账号与初始密码。')
+        });
+    </script>
+} else
+{
+    LoginStatus login = (LoginStatus)Session["login"];
+    <ul class="nav nav-stacked">
+        <li>当前登录用户：@login.UserName</li>
+        <li>@login.RealName，欢迎回家！</li>
+        <li>@Html.ActionLink("修改密码","ChangePw","Main")</li>
+    </ul>
+}
+
+@*@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -19,4 +53,4 @@ else
         <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
-}
+}*@

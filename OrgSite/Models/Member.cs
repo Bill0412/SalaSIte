@@ -40,7 +40,7 @@ namespace OrgSite.Models
         public DateTime? Birthday { get; set; }
 
         [Display(AutoGenerateField = false,Name = "加入时间")]
-        public DateTime EntryTime { get; set; }
+        public DateTime? EntryTime { get; set; }
 
         [Display(AutoGenerateField =false, Name = "退休时间")]
         public DateTime? ResignTime { get; set; }

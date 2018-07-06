@@ -1,0 +1,102 @@
+﻿@model IEnumerable<OrgSite.Models.Massage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <row>
+        <div class="col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading"><h3>协会简介</h3></div>
+                <div class="panel-body">
+                    @ViewBag.intro
+                </div>
+  
+
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img src="~/Content/main.png" alt="活动照片" style="width:100%;align-content:center" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3>部门简介</h3></div>
+                <div class="panel-body">
+                    @foreach(var item in Model)
+                    {
+                        <h4>@item.Header</h4>
+                        <p>@item.Content</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </row>
+</div>
+@*
+<!--
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Header)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.publishingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TargetId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Header)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.publishingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TargetId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MId })
+        </td>
+    </tr>
+}
+
+</table>
+    -->
+*@

@@ -1,12 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ZJU SALA</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+
 </head>
 <body>
     <header></header>
@@ -27,7 +30,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav nav-pills navbar-nav navbar-right">
-                    <li role="presentation" class="active"><a href=@Url.Action("Index","Home")><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                    <li role="presentation" class="active"><a href=@Url.Action("Index","Main")><span class="glyphicon glyphicon-home"></span> 主页</a></li>
                     <li role="presentation">@Html.ActionLink("通讯录", "Index", "Members")</li>
                     <li role="presentation">@Html.ActionLink("BBS", "Index", "Massages")</li>
                     <li role="presentation">@Html.ActionLink("活动管理", "Index", "Events")</li>
@@ -43,12 +46,12 @@
     <hr />
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-1"></div>
-            <div class="col-md-8">
+            <div class="col-md-2">
+                @Html.Partial("_LoginPartial")
+            </div>
+            <div class="col-md-10">
                 @RenderBody()
             </div>
-            <div class="col-md-1"></div>
         </div>
     </div>
 
@@ -60,7 +63,6 @@
         <p class="text-center">浙江大学学生校友联络协会 -<small>关注微信公众号：zjusala</small></p>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
