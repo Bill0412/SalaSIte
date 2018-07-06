@@ -10,7 +10,11 @@
 
 </head>
 <body>
+
     <nav class="navbar navbar-default navbar-fixed-top">
+        <header>
+            <span class="glyphicon-sunglasses"></span>
+        </header>
         <div class="container-fluid  ">
             <div class="row">
                 <div class="navbar-header">
@@ -19,13 +23,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <p class="navbar-brand ">SALA</p>
+                    <p class="navbar-brand text-capitalize">SALA</p>
                 </div>
-                <div class="navbar-collapse">
+                <div class="navbar-collapse navbar-left">
                     <ul class="nav nav-pills">
-                        <li role="presentation" class="active"><a href="#">好难呀..</a></li>
-                        <li role="presentation">@Html.ActionLink("通讯录","Index","Members")</li>
-                        <li role="presentation"><a href="#">Messages</a></li>
+                        <li role="presentation" class="active">@Html.ActionLink("首页", "Index", "Home")</li>
+                        <li role="presentation">@Html.ActionLink("通讯录", "Index", "Members")</li>
+                        <li role="presentation">@Html.ActionLink("BBS", "Index", "Massage")</li>
                     </ul>
 
                 </div>
@@ -33,17 +37,12 @@
 
         </div>
     </nav>
-    <header>
-        <div>
-            <h5>@ViewBag.Title</h5>
-        </div>
-
-    </header>
 
 
 
 
-    <div class="container body-content">
+    <div class="container">
+        <hr />
         @RenderBody()
         <hr />
         <footer>

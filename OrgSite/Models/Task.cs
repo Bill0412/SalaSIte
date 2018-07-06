@@ -10,7 +10,7 @@ namespace OrgSite.Models
     public partial class TaskOfEvent
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskId { get; set; }
 
         [Column(TypeName = "ntext")]
