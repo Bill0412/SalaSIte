@@ -14,6 +14,7 @@ namespace OrgSite.Models
 
         [Required]
         [StringLength(50)]
+        [Display(AutoGenerateField = false)]
         public string PassWord { get; set; }
 
         public virtual Member Member { get; set; }

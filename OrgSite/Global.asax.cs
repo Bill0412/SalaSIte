@@ -19,7 +19,7 @@ namespace OrgSite
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer<DbAccess>(null);
+            Database.SetInitializer<DbAccess>(new DbInit());
         }
     }
     public class DbInit : DropCreateDatabaseAlways<DbAccess>
