@@ -10,6 +10,10 @@ namespace OrgSite.Models
         public string UserName { get; set; }
         public string RealName { get; set; }
         public string Position { get; set; }
+        public bool IsManager()
+        {
+            return this.Position != "社员";
+        }
     }
 
     public class ResetPasswordViewModel
@@ -17,6 +21,12 @@ namespace OrgSite.Models
         [Required]
         [Display(Name = "用户名")]
         public string UserName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} 必须至少包含 {2} 个字符。", MinimumLength = 4)]
+        [DataType(DataType.Password)]
+        [Display(Name = "旧密码")]
+        public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "{0} 必须至少包含 {2} 个字符。", MinimumLength = 6)]
@@ -31,19 +41,7 @@ namespace OrgSite.Models
 
         public string Code { get; set; }
     }
-
-    public class ExternalLoginConfirmationViewModel
-    {
-        [Required]
-        [Display(Name = "电子邮件")]
-        public string Email { get; set; }
-    }
-
-    public class ExternalLoginListViewModel
-    {
-        public string ReturnUrl { get; set; }
-    }
-
+#region //not my code.
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -119,3 +117,4 @@ namespace OrgSite.Models
         public string Email { get; set; }
     }
 }
+#endregion

@@ -26,8 +26,7 @@ namespace OrgSite.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<Event>()
-                .Property(e => e.Type)
-                .IsFixedLength();
+                .Property(e => e.Type);
 
             modelBuilder.Entity<Event>()
                 .HasMany(e => e.EventAssignments)
@@ -43,25 +42,22 @@ namespace OrgSite.Models
                 .Property(e => e.Role)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Massage>()
-                .Property(e => e.Topic)
-                .IsFixedLength();
+            //modelBuilder.Entity<Massage>()
+            //    .Property(e => e.Topic)
+            //    .IsFixedLength();
 
             modelBuilder.Entity<MemberLogin>()
-                .Property(e => e.UserName)
-                .IsFixedLength();
+                .Property(e => e.UserName);//                .IsFixedLength();
 
             modelBuilder.Entity<Member>()
-                .Property(e => e.RealName)
-                .IsFixedLength();
+                .Property(e => e.RealName);//                .IsFixedLength();
 
             modelBuilder.Entity<Member>()
-                .Property(e => e.Department)
-                .IsFixedLength();
+                .Property(e => e.Department);//                .IsFixedLength();
 
             modelBuilder.Entity<Member>()
-                .Property(e => e.Position)
-                .IsFixedLength();
+                .Property(e => e.Position);
+                //.IsFixedLength();
 
             modelBuilder.Entity<Member>()
                 .Property(e => e.Email)
@@ -83,8 +79,8 @@ namespace OrgSite.Models
                 .WithRequired(e => e.Member);
 
             modelBuilder.Entity<MemberLogin>()
-                .Property(e => e.PassWord)
-                .IsFixedLength();
+                .Property(e => e.PassWord);
+                //.IsFixedLength();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace OrgSite.Controllers
         // GET: Main
         public ActionResult Index()
         {
+            var t = Session["login"];
             List<Massage> massages;
             using(DbAccess db=new DbAccess())
             {
@@ -32,8 +33,10 @@ namespace OrgSite.Controllers
         [HttpPost]
         public ActionResult ChangePw(ResetPasswordViewModel resetPw)
         {
+            ViewBag.tips = null;
             if (resetPw.ConfirmPassword != resetPw.Password)
             {
+                ViewBag.tips = "两次输入不一致";
                 return View();
             }
             else
@@ -42,11 +45,28 @@ namespace OrgSite.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        var one = db.MemberLogins.Find(resetPw.UserName);
+                        if (one.PassWord.Trim() != resetPw.OldPassword) { ViewBag.tips = "原密码输入错误"; ; return View(); }
+                        db.MemberLogins.Find(resetPw.UserName).PassWord = resetPw.Password;
                         //db.Entry(resetPw).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
                 }
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Logout()
+        {
+            var cur = Session["login"];
+            if (null != cur)
+            {
+                //(LoginStatus)cur;
+                Session.Remove("login");
+            }
+            else
+            {
+                
             }
             return RedirectToAction("Index");
         }
@@ -79,7 +99,7 @@ namespace OrgSite.Controllers
             
             using(DbAccess db=new DbAccess())
             {
-                var user = db.MemberLogins.Where(x => x.UserName == login.UserName && x.PassWord==login.PassWord);
+                var user = db.MemberLogins.Where(x => x.UserName.Trim() == login.UserName && x.PassWord.Trim()==login.PassWord);
                 if (user.Any())
                 {
                     try
@@ -93,6 +113,10 @@ namespace OrgSite.Controllers
                     {
                         ViewBag.err = e.Message;
                     }
+                }
+                else
+                {
+                    ViewBag.tips = "密码错误";
                 }
             }
             return RedirectToAction("Index", "Members");

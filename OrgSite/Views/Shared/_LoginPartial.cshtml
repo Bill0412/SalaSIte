@@ -17,6 +17,7 @@
             <button type="button" id="btnsighup" class="btn btn-default">注册@*Html.ActionLink("注册","SighUp","Main")*@</button>
         </div>
         <br />@ViewBag.err
+        <span class="text-danger">@ViewBag.tips</span>
     }
     <script>
         $("#btnsighup").bind("click", function () {
@@ -29,7 +30,7 @@
     <ul class="nav nav-stacked">
         <li>当前登录用户：@login.UserName</li>
         <li>@login.RealName，欢迎回家！</li>
-        <li>@Html.ActionLink("修改密码","ChangePw","Main")</li>
+        <li>@Html.ActionLink("修改密码","ChangePw","Main")@Html.ActionLink("退出登录","Logout","Main")</li>
     </ul>
 }
 

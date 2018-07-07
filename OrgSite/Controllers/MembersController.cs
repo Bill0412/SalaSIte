@@ -50,6 +50,12 @@ namespace OrgSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,UserName,RealName,Department,Position,Email,PhoneNumber,Birthday,EntryTime,ResignTime,SelfDescription")] Member member)
         {
+            LoginStatus loginStatus = (LoginStatus)Session["login"];
+            if (loginStatus.Position == "社员")
+            {
+                return RedirectToAction("Index");
+            }
+            member.EntryTime = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Members.Add(member);
@@ -114,9 +120,16 @@ namespace OrgSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(short id)
         {
-            Member member = db.Members.Find(id);
-            db.Members.Remove(member);
-            db.SaveChanges();
+            if (((LoginStatus)Session["login"]).IsManager())
+            {
+                Member member = db.Members.Find(id);
+                db.Members.Remove(member);
+                db.SaveChanges();
+            }
+            else
+            {
+                ViewBag.tips = "没有权限";
+            }
             return RedirectToAction("Index");
         }
 

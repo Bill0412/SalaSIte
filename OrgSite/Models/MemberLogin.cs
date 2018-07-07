@@ -17,7 +17,7 @@ namespace OrgSite.Models
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(20,MinimumLength =4,ErrorMessage ="密码长度不符要求。")]
         [Display(AutoGenerateField = false)]
         public string PassWord { get; set; }
 
