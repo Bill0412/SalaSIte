@@ -22,13 +22,6 @@ namespace OrgSite.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>()
-                .Property(e => e.Status)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Event>()
-                .Property(e => e.Type);
-
-            modelBuilder.Entity<Event>()
                 .HasMany(e => e.EventAssignments)
                 .WithRequired(e => e.Event)
                 .WillCascadeOnDelete(false);
@@ -38,35 +31,12 @@ namespace OrgSite.Models
                 .WithRequired(e => e.Event)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<EventAssignment>()
-                .Property(e => e.Role)
-                .IsFixedLength();
-
-            //modelBuilder.Entity<Massage>()
-            //    .Property(e => e.Topic)
-            //    .IsFixedLength();
-
-            modelBuilder.Entity<MemberLogin>()
-                .Property(e => e.UserName);//                .IsFixedLength();
-
-            modelBuilder.Entity<Member>()
-                .Property(e => e.RealName);//                .IsFixedLength();
-
-            modelBuilder.Entity<Member>()
-                .Property(e => e.Department);//                .IsFixedLength();
-
-            modelBuilder.Entity<Member>()
-                .Property(e => e.Position);
-                //.IsFixedLength();
-
             modelBuilder.Entity<Member>()
                 .Property(e => e.Email)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<Member>()
                 .Property(e => e.PhoneNumber)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<Member>()
@@ -77,10 +47,6 @@ namespace OrgSite.Models
             modelBuilder.Entity<Member>()
                 .HasOptional(e => e.MemberLogin)
                 .WithRequired(e => e.Member);
-
-            modelBuilder.Entity<MemberLogin>()
-                .Property(e => e.PassWord);
-                //.IsFixedLength();
         }
     }
 }
