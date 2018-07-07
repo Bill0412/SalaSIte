@@ -6,15 +6,12 @@
 }
 
 <h2>SALA通讯录</h2>
-
+<p class="text-danger"> @ViewBag.tips </p>
 <p>
     @Html.ActionLink("添加新成员", "Create")
 </p>
 <script></script>
 <style>
-    #id-3 {
-        color:red;
-    }
     tbody.detail td.itemname{
         width:30%;
         text-align:center;
@@ -67,11 +64,6 @@
                 <a data-toggle="collapse" data-parent="#accordion" data-target="#id-@item.UserId">
                     <span class="glyphicon glyphicon-collapse-down"></span> More
                 </a>
-
-                <!--                 <button class="btn" data-toggle="collapse" data-target="#detail-@item.UserId" data-parent="#accordion">
-        <span class="glyphicon glyphicon-collapse-down"></span> More
-    </button>
-                    span class="glyphicon-arrow-down"></!--span>-->
             </td>
         </tr>
         <tr>
@@ -84,7 +76,6 @@
                         </tr>
                     </thead>
                     <tbody class="collapse detail" style="margin-left:6px" id="id-@item.UserId">
-
                         <tr>
                             <td class="itemname">@Html.DisplayNameFor(model => model.Email)</td>
                             <td>@Html.DisplayFor(modelItem => item.Email)</td>
@@ -115,13 +106,13 @@
 
                 </table>
 
-                <!-- <div class="container">
+            @*    <!-- <div class="container">
         <div class="row">
             <div class="col-md-2">@Html.DisplayNameFor(model => model.Email)</div>
             <div class="col-md-6">@Html.DisplayFor(modelItem => item.Email)</div>
         </div>
     </div>
-               @* <table border="1">
+                <table border="1">
            <tr>
 
                <td align="left" width="300">@Html.DisplayNameFor(model => model.Email)</td>
@@ -134,7 +125,7 @@
                <div style="background-color:aqua">
                    <div class="collapse" id="id-@item.UserId">
                    </div>
-               </div>*@ -->
+               </div> -->*@
             </td>
 
         </tr>

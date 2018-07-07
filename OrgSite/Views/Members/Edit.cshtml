@@ -1,11 +1,16 @@
-﻿@model OrgSite.Models.Member
+﻿@using OrgSite.Models;
+@model OrgSite.Models.Member
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section css{
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/datepicker.css" />
 
-<h2>Edit</h2>
+}
+
+<h2>编辑</h2>
 
 
 @using (Html.BeginForm())
@@ -14,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="form-horizontal">
-                <h4>Member</h4>
+                <h4>成员信息</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.UserId)
@@ -41,14 +46,16 @@
                         @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                @if (Session["login"] != null && ((LoginStatus)Session["login"]).Position != "社员")
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
+                }
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -73,22 +80,10 @@
                         @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.EntryTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.EntryTime, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.EntryTime, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ResignTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ResignTime, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ResignTime, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
+                    <div id="datepick" class="col-md-10 col-md-offset-2"></div>
+                </div>
+                @**@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.SelfDescription, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -102,18 +97,32 @@
                         <input type="submit" value="Save" class="btn btn-default" />
                     </div>
                     <div class="col-md-8">
-                        <input type="button" value="Resign" class="btn btn-default" />
+                        <input type="button" value="Resign" id="resignbtn" class="btn btn-default" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
-
+<script>
+    $(function () {
+        $("#resignbtn").bind("click", function () {
+            confirm("确定提交离任吗？");
+        })
+    })
+</script>
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("返回列表", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datepick').datepicker({
+                altField: 'input#Birthday', dateFormat: "dd-mm-yy", changeYear: true, changeMonth: true
+            });
+        });
+    </script>
 }

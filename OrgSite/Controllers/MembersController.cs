@@ -14,6 +14,27 @@ namespace OrgSite.Controllers
     {
         private DbAccess db = new DbAccess();
 
+        private readonly string notAccess = "您没有相应的权限！";
+        private bool AllowedToModify(short? userid)
+        {
+            if(Session["login"] == null)
+            {
+                var cur = (LoginStatus)Session["login"];
+                if (cur.Position != "社员") return true;
+                else if (cur.UserId == userid) return true;
+            }
+            return false;
+        }
+        private bool AllowedToModify()
+        {
+            if (Session["login"] != null)
+            {
+                var cur = (LoginStatus)Session["login"];
+                if (cur.Position != "社员") return true;
+            }
+            return false;
+        }
+
         // GET: Members
         public ActionResult Index()
         {
@@ -22,23 +43,12 @@ namespace OrgSite.Controllers
         }
 
         // GET: Members/Details/5
-        public ActionResult Details(short? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Member member = db.Members.Find(id);
-            if (member == null)
-            {
-                return HttpNotFound();
-            }
-            return View(member);
-        }
 
         // GET: Members/Create
         public ActionResult Create()
         {
+            if (!AllowedToModify()) { ViewBag.tips = notAccess; return Content(notAccess);
+            }
             ViewBag.UserId = new SelectList(db.MemberLogins, "UserId", "PassWord");
             return View();
         }
@@ -51,9 +61,10 @@ namespace OrgSite.Controllers
         public ActionResult Create([Bind(Include = "UserId,UserName,RealName,Department,Position,Email,PhoneNumber,Birthday,EntryTime,ResignTime,SelfDescription")] Member member)
         {
             LoginStatus loginStatus = (LoginStatus)Session["login"];
-            if (loginStatus.Position == "社员")
+            if (!AllowedToModify())
             {
-                return RedirectToAction("Index");
+                ViewBag.tips = notAccess;
+                return Content(notAccess);
             }
             member.EntryTime = DateTime.Now;
             if (ModelState.IsValid)
@@ -73,6 +84,11 @@ namespace OrgSite.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (!AllowedToModify(id))
+            {
+                ViewBag.tips=notAccess;
+                return Content(notAccess);
             }
             Member member = db.Members.Find(id);
             if (member == null)
@@ -120,7 +136,7 @@ namespace OrgSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(short id)
         {
-            if (((LoginStatus)Session["login"]).IsManager())
+            if (AllowedToModify())
             {
                 Member member = db.Members.Find(id);
                 db.Members.Remove(member);
@@ -128,7 +144,8 @@ namespace OrgSite.Controllers
             }
             else
             {
-                ViewBag.tips = "没有权限";
+                ViewBag.tips = notAccess;
+                return Content(notAccess);
             }
             return RedirectToAction("Index");
         }

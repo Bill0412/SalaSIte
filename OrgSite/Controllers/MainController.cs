@@ -119,7 +119,7 @@ namespace OrgSite.Controllers
                     ViewBag.tips = "密码错误";
                 }
             }
-            return RedirectToAction("Index", "Members");
+            return RedirectToAction("Index", "Main");
         }
     }
 }
