@@ -14,9 +14,30 @@ namespace OrgSite.Controllers
     {
         private DbAccess db = new DbAccess();
 
-        private bool AccessToEvent(int id)
+        private bool AccessToEvent(int eid)
         {
-            
+            var o = Session["login"];
+            if (LoginStatus.IsMember(o))
+            {
+                short uid = (o as LoginStatus).UserId;
+                if (db.EventAssignments.Where(x => x.UserId == uid).Any()) return true;
+            }
+            return false;
+        }
+        private List<EventMemberViewModel> GetMembersAccessible(int? eid)
+        {
+            if (eid == null) return null;
+            var q = from x in db.Members
+                    join y in db.EventAssignments on x.UserId equals y.UserId
+                    select new EventMemberViewModel
+                    {
+                        Uid=x.UserId,
+                        Name=x.RealName,
+                        PhoneNumber=x.PhoneNumber,
+                        Role=y.Role,
+                        Position=x.Position
+                    };
+            return q.ToList();
         }
 
         // GET: Events
@@ -26,18 +47,20 @@ namespace OrgSite.Controllers
         }
 
         // GET: Events/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult EventMembers(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            var mlist = GetMembersAccessible(id);//Event @event = db.Events.Find(id);
+            if (mlist == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            ViewBag.msg = db.Events.Find(id).EventName;
+            ViewBag.eid = id;
+            return View(mlist);
         }
 
         // GET: Events/Create
@@ -55,6 +78,7 @@ namespace OrgSite.Controllers
         {
             if (ModelState.IsValid)
             {
+                @event.StartingTime = DateTime.Now;
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");

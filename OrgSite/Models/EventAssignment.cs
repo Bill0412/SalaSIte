@@ -17,6 +17,7 @@ namespace OrgSite.Models
         public int EventId { get; set; }
 
         [StringLength(20)]
+        [Display(Name = "½ÇÉ«")]
         public string Role { get; set; }
 
         public virtual Event Event { get; set; }

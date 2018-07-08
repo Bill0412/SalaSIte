@@ -309,6 +309,7 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\EventMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,38 @@
+﻿@model List<OrgSite.Models.EventMemberViewModel>
+@{
+    ViewBag.Title = "EventMembers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>项目组成员</h2>
+<div class="panel panel-collapse">
+    <div class="panel-heading">
+        <h4>活动名称：@ViewBag.msg</h4>
+        @if (OrgSite.Models.LoginStatus.IsManager(Session["login"]))
+        {
+            <p class="text-warning" >@Html.ActionLink("添加项目组成员","AddMember",new { id = ViewBag.eid })</p>
+        }
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>序号</th><th>姓名</th><th>联系方式</th><td>项目组角色</td><td>社团内岗位</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Uid</td>
+                        <td>@item.Name</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Role</td>
+                        <td>@item.Position</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -33,10 +33,7 @@ namespace OrgSite.Models
         public string UserName { get; set; }
         public string RealName { get; set; }
         public string Position { get; set; }
-        public bool IsManager()
-        {
-            return this.Position != "…Á‘±";
-        }
+
         static public bool OfPosition(object o, Position position)
         {
             return false;

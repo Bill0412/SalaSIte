@@ -13,79 +13,63 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(function () {
             $('#accordion').accordion({
-                active: false, header: "h3",collapsible:false,
+                active: false, header: "div.ui-accordion-header", collapsible: true,
             });
         });
     </script>
 }
-    <div id="accordion" class="ui-accordion">
-        @foreach (var item in Model)
-        {
-            <h3 class="ui-accordion-header">@Html.DisplayFor(modelItem=>item.EventName)<span class="text-right">@item.Status</span></h3>
-            <div class="ui-accordion-content">
-                @Html.DisplayNameFor(model=>model.Detail)
-                @Html.DisplayFor(mi=>item.Detail)
-            </div>
-        }
+<h2 class="text-primary">活动列表</h2>
+@if (OrgSite.Models.LoginStatus.IsManager(Session["login"]))
+{
+    <p class="text-danger text-right">
+        @Html.ActionLink("添加新活动", "Create")
+    </p>
+}
 
-    </div>
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EventName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartingTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Link)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Detail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th></th>
-    </tr>
-
+<div id="accordion" class="ui-accordion">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartingTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Detail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.EventId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
-            </td>
-        </tr>
+    <div class="panel panel-warning">
+        <div class="ui-accordion-header panel-heading">
+            <div class="row">
+                <div class="col-md-6 text-success "><b>@Html.DisplayFor(modelItem => item.EventName)</b></div>
+                <div class="col-md-2 col-md-offset-4 text-center text-muted">@item.Status</div>
+            </div>
+            <span></span>
+        </div>
+        @*<div class="ui-accordion-content panel-body">
+            <div class="row">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Detail)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(mi => item.Detail)</div>
+            </div>
+            <div class="row li">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Type)</strong></div>
+                <div class="col-md-9 text-center">@Html.DisplayFor(m => item.Type)</div>
+            </div>
+
+        </div>*@
+        <div class="ui-accordion-content panel-body dl-horizontal">
+            <dl>
+                <dt><span class="">@Html.DisplayNameFor(model => model.EventId)</span></dt>
+                <dd><span>@Html.DisplayFor(m => item.EventId)</span></dd>
+                <dt><span class="">@Html.DisplayNameFor(model => model.Type)</span></dt>
+                <dd><span>@Html.DisplayFor(m => item.Type)</span></dd>
+                <dt>@Html.DisplayNameFor(model => model.Link)</dt>
+                <dd>@Html.DisplayFor(mi => item.Link)</dd>
+                <dt>@Html.DisplayNameFor(model => model.StartingTime)</dt>
+                <dd>@Html.DisplayFor(mi => item.StartingTime)</dd>
+                <dt><strong>@Html.DisplayNameFor(model => model.Detail)</strong></dt>
+                <dd>@Html.DisplayFor(mi => item.Detail)</dd>
+            </dl>
+            @Html.ActionLink("查看任务与进度", "EventTasks", new { id = item.EventId }) |
+            @Html.ActionLink("查看项目组人员", "EventMembers", new { id = item.EventId }) |
+            @Html.ActionLink("删除活动", "Delete", new { id = item.EventId })
+            @Html.ActionLink("编辑活动", "Edit", new { id = item.EventId })
+        </div>
+    </div>
+
     }
 
-</table>
+</div>
