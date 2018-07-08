@@ -3,18 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OrgSite.Models
 {
-    public class LoginStatus
-    {
-        public short UserId { get; set; }
-        [MaxLength(20, ErrorMessage = "超出用户名的长度限制。")]
-        public string UserName { get; set; }
-        public string RealName { get; set; }
-        public string Position { get; set; }
-        public bool IsManager()
-        {
-            return this.Position != "社员";
-        }
-    }
 
     public class ResetPasswordViewModel
     {

@@ -1,10 +1,7 @@
 namespace OrgSite.Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("MemberLogin")]
     public partial class MemberLogin
@@ -24,5 +21,35 @@ namespace OrgSite.Models
         public virtual Member Member { get; set; }
     }
 
+    public enum Position
+    {
+        nobody,members,board,top,other
+    }
 
+    public class LoginStatus
+    {
+        public short UserId { get; set; }
+        [MaxLength(20, ErrorMessage = "超出用户名的长度限制。")]
+        public string UserName { get; set; }
+        public string RealName { get; set; }
+        public string Position { get; set; }
+        public bool IsManager()
+        {
+            return this.Position != "社员";
+        }
+        static public bool OfPosition(object o, Position position)
+        {
+            return false;
+        }
+        static public bool IsMember(object o)
+        {
+            return o != null;
+        }
+        static public bool IsManager(object o)
+        {
+            if (o == null) return false;
+            var u = o as LoginStatus;
+            return u.Position != "社员";
+        }
+    }
 }

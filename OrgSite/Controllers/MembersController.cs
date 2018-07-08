@@ -17,7 +17,7 @@ namespace OrgSite.Controllers
         private readonly string notAccess = "您没有相应的权限！";
         private bool AllowedToModify(short? userid)
         {
-            if(Session["login"] == null)
+            if(Session["login"] != null)
             {
                 var cur = (LoginStatus)Session["login"];
                 if (cur.Position != "社员") return true;
@@ -47,7 +47,8 @@ namespace OrgSite.Controllers
         // GET: Members/Create
         public ActionResult Create()
         {
-            if (!AllowedToModify()) { ViewBag.tips = notAccess; return Content(notAccess);
+            if (!AllowedToModify()) {
+                ViewBag.tips = notAccess; return Content(notAccess);
             }
             ViewBag.UserId = new SelectList(db.MemberLogins, "UserId", "PassWord");
             return View();

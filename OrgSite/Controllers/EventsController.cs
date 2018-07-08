@@ -14,6 +14,11 @@ namespace OrgSite.Controllers
     {
         private DbAccess db = new DbAccess();
 
+        private bool AccessToEvent(int id)
+        {
+            
+        }
+
         // GET: Events
         public ActionResult Index()
         {

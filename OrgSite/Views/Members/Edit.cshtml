@@ -9,7 +9,17 @@
     <link rel="stylesheet" type="text/css" href="~/Content/themes/base/datepicker.css" />
 
 }
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datepick').datepicker({
+                altField: 'input#Birthday', dateFormat: "dd-mm-yy", changeYear: true, changeMonth: true
+            });
+        });
+    </script>
+}
 <h2>编辑</h2>
 
 
@@ -115,14 +125,4 @@
     @Html.ActionLink("返回列表", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#datepick').datepicker({
-                altField: 'input#Birthday', dateFormat: "dd-mm-yy", changeYear: true, changeMonth: true
-            });
-        });
-    </script>
-}
+

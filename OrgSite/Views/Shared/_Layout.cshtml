@@ -10,6 +10,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("css", false)
+    <script>
+        $(function () {
+            var con = @ViewContext.RouteData.Values["controller"] 
+
+        })
+    </script>
 </head>
 <body>
     <header></header>
@@ -30,10 +36,10 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav nav-pills navbar-nav navbar-right">
-                    <li role="presentation" class="active"><a href=@Url.Action("Index","Main")><span class="glyphicon glyphicon-home"></span> 主页</a></li>
-                    <li role="presentation">@Html.ActionLink("通讯录", "Index", "Members")</li>
-                    <li role="presentation">@Html.ActionLink("BBS", "Index", "Massages")</li>
-                    <li role="presentation">@Html.ActionLink("活动管理", "Index", "Events")</li>
+                    <li role="presentation" id="main" class="active"><a href=@Url.Action("Index","Main")><span class="glyphicon glyphicon-home"></span> 主页</a></li>
+                    <li role="presentation" id="member">@Html.ActionLink("通讯录", "Index", "Members")</li>
+                    <li role="presentation" id="massage">@Html.ActionLink("BBS", "Index", "Massages")</li>
+                    <li role="presentation" id="event">@Html.ActionLink("活动管理", "Index", "Events")</li>
                 </ul>
             </div>
         </div>

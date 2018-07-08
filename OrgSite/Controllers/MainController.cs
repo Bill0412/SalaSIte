@@ -9,6 +9,7 @@ namespace OrgSite.Controllers
 {
     public class MainController : Controller
     {
+
         // GET: Main
         public ActionResult Index()
         {
@@ -16,7 +17,7 @@ namespace OrgSite.Controllers
             List<Massage> massages;
             using(DbAccess db=new DbAccess())
             {
-                var q = from x in db.Massages where x.Header== "协会简介" select x.Content;
+                var q = from x in db.Massages where x.Header== "协会简介" orderby x.publishingTime select x.Content;
                 //string content= db.Massages.LastOrDefault(x=>x.Header=="协会简介").Content;
                 string content = q.First();
                 ViewBag.intro = content;

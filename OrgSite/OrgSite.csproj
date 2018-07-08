@@ -201,6 +201,7 @@
     <Compile Include="Models\DbAccess.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventAssignment.cs" />
+    <Compile Include="Models\EventTaskViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Massage.cs" />
     <Compile Include="Models\Member.cs" />
